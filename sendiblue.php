@@ -27,7 +27,7 @@ function my_custom_checkout_field($checkout)
     woocommerce_form_field('is_checked', array(
         'type' => 'checkbox',
         'class' => array('input-checkbox'),
-        'label' => __('I have read and agreed.'),
+        'label' => __('Thank you for using our product! Sign up to receive special offers, updates and more!'),
         'default' => 1,
     ), $checkout->get_value('is_checked'));
 
@@ -58,12 +58,10 @@ function wc_send_order_to_sendiblue($order_id)
     if ($ifHave) {
         $orderData = file_get_contents(__DIR__ . "/temp_data.log");
         $json_decode_order = json_decode($orderData, true);
-
         $heymehedi_email = $json_decode_order['billing']['email'];
         $heymehedi_first_name = $json_decode_order['billing']['first_name'];
         $heymehedi_last_name = $json_decode_order['billing']['last_name'];
         $heymehedi_phone = $json_decode_order['billing']['phone'];
-
         $heymehedi_metaKeys = $json_decode_order['meta_data'];
 
         foreach ($heymehedi_metaKeys as $metaKey) {
@@ -73,7 +71,7 @@ function wc_send_order_to_sendiblue($order_id)
                     /**
                      * Creating New Contact
                      **/
-                    $config = SendinBlue\Client\Configuration::getDefaultConfiguration()->setApiKey('api-key', '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');
+                    $config = SendinBlue\Client\Configuration::getDefaultConfiguration()->setApiKey('api-key', 'PUT_YOUR_API_KEY_HERE');
 
                     $apiInstance = new SendinBlue\Client\Api\ContactsApi(
                         new GuzzleHttp\Client(),
@@ -85,7 +83,7 @@ function wc_send_order_to_sendiblue($order_id)
                         "FIRSTNAME" => "$heymehedi_first_name",
                         "LASTNAME" => "$heymehedi_last_name",
                     );
-                    $createContact['listIds'] = [2];
+                    $createContact['listIds'] = ['PUT_YOUR_LISY_ID_HERE'];
 
                     try {
                         $apiInstance->createContact($createContact);
