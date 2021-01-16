@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Sendinblue for WooCommerce
- * Plugin URI: https://goodtechies.com/
+ * Plugin URI: https://heymehedi.com/
  * Description: No Description
  * Version: 1.0
  * Author: Md Mehedi Hasan
